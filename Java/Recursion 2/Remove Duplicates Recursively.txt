@@ -1,0 +1,16 @@
+public class Solution {
+
+	public static String removeConsecutiveDuplicates(String s) {
+      	String str="";
+      	if(s.length()==1){
+          str=s;
+          return str;
+        }
+	    String actual=removeConsecutiveDuplicates(s.substring(0,s.length()-1));
+      	if(s.charAt(s.length()-1)==actual.charAt(actual.length()-1)){
+          return actual;
+        }
+     	actual+=Character.toString(s.charAt(s.length()-1));
+      	return actual;
+	}
+}

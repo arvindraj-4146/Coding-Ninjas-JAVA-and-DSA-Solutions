@@ -1,0 +1,26 @@
+public class Solution {
+
+	public static void leaders(int[] input) {
+        
+        int max[]=new int[input.length];
+
+        for(int i=input.length-1; i>=0; i--) {
+
+            if(i==input.length-1)
+            {
+                max[i]=input[i];
+            }
+            else {
+                
+                max[i]=max[i+1]<input[i]?input[i]:max[i+1];
+            }
+        }
+        for(int i=input.length-1; i>=0; i--) {
+
+            if(max[i]<=input[i]) {
+
+                System.out.print(input[i]+" ");
+            }
+        }
+	}
+}

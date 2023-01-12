@@ -1,0 +1,33 @@
+public class Solution {
+
+	public static int lastIndex(int input[], int x) {
+
+    if(input.length<=1) {
+        if(input[0]==x) {
+            return 0;
+        }
+        else
+        {
+
+          return -1;
+        }
+      }
+      int []smallArray=new int[input.length-1];
+      for(int index=1;index<input.length;index++) {
+
+        smallArray[index-1]=input[index];
+      }
+	    int val=lastIndex(smallArray,x);
+      	if(val==-1){
+          if(input[0]==x) {
+
+            return 0;
+          }
+      }
+      if(val>=0) {
+
+	      	return ++val; 
+      }
+    return -1;
+	}
+}

@@ -1,0 +1,19 @@
+public class Solution {
+
+	public static int height(BinaryTreeNode<Integer> root) {
+		
+        if(root==null){
+
+            return 0;
+        }
+        int smallLeftOutput = height(root.left);
+        int smallRightoutput = height(root.right);
+        if(smallRightoutput>smallLeftOutput){
+
+            return smallRightoutput+1;
+        }else{
+
+            return smallLeftOutput+1;
+        }
+	}
+}

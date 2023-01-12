@@ -1,0 +1,38 @@
+import java.util.*;
+public class Solution {
+
+	public static boolean checkIfContainsX(TreeNode<Integer> root, int x){
+        if(root==null)
+        return false;
+
+        Queue<TreeNode<Integer>> queue = new LinkedList<>();
+    
+        queue.add(root);
+        queue.add(null);
+		int ans=0;
+        while(!queue.isEmpty()) {
+
+            TreeNode<Integer> frontNode = queue.remove();
+            if(frontNode == null) {
+
+                if(queue.isEmpty()) {
+
+                    break;
+                }
+                
+                queue.add(null);
+            }
+            else
+            {
+            	f(frontNode.data==x)
+           		return true;
+                for(int i=0;i<frontNode.children.size();i++) {
+
+                    queue.add(frontNode.children.get(i));
+                    
+                }
+            } 
+        } 
+        return false;  
+	}
+}

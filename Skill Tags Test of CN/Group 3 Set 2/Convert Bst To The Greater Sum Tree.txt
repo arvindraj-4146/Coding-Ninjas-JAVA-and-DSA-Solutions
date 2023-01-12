@@ -1,0 +1,121 @@
+/********************
+
+    Following is the TreeNode class structure
+
+    class TreeNode<T> {
+        T val;
+        TreeNode<T> left;
+        TreeNode<T> right;
+
+        public TreeNode(T val) {
+            this.val = val;
+            left = null
+            right = null
+        }
+    };
+
+ ********************/
+ 
+// class Solution{
+// 	public static TreeNode<Integer> convertBstToGreaterSum(TreeNode<Integer> root)
+// 	{
+// 		// Write your code here.
+// 	}
+// }
+
+import java.util.HashMap;
+public class Solution {
+	private static int getMaxSum(TreeNode<Integer> root, int keyValue) {
+
+		if (root == null) {
+			return 0;
+		}
+
+		int sum = 0, leftAns = 0, rightAns = 0;
+
+		/*
+		   If value at root is less than keyValue then go for right subtree because
+		   all the values from left subtree will be smaller.
+		*/
+		if (root.val <= keyValue) {
+			rightAns = getMaxSum(root.right, keyValue);
+		} else {
+
+			// Value at root is greater than keyValue, add it.
+			sum = sum + root.val;
+
+			/*
+			   Find the sum of all the nodes from left subtree
+			   which have value greater than keyValue.
+			*/
+			leftAns = getMaxSum(root.left, keyValue);
+
+			/*
+			   Find the sum of all the nodes from right subtree which have value greater
+			   than keyValue.
+			*/
+			rightAns = getMaxSum(root.right, keyValue);
+		}
+
+		// Return the total sum.
+		return sum + leftAns + rightAns;
+	}
+
+	// Function to store the sum of greater nodes for each node in the tree.
+	private static void findGreaterSum(TreeNode<Integer> currentRoot, TreeNode<Integer> root,
+	                                   HashMap<Integer, Integer> map) {
+
+		if (currentRoot == null) {
+			return;
+		}
+
+		// Get the sum of all the nodes which are greater than the current node.
+		int maxNodeSum = getMaxSum(root, currentRoot.val);
+
+		// Store it for later use.
+		map.put(currentRoot.val, maxNodeSum);
+
+		// Recur for the left subtree.
+		findGreaterSum(currentRoot.left, root, map);
+
+		// Recur for the right subtree.
+		findGreaterSum(currentRoot.right, root, map);
+	}
+
+	/*
+	   Replace each node with the sum of values of all the nodes which have value
+	   greater than that node.
+	*/
+	private static void replaceWithGreaterSum(TreeNode<Integer> root, HashMap<Integer, Integer> map) {
+
+		if (root == null) {
+			return;
+		}
+
+		/*
+		   Replace root.val with the sum of all the nodes
+		   which are greater than the root->val.
+		*/
+		root.val = map.get(root.val);
+
+		// Replace all the nodes in the left subtree.
+		replaceWithGreaterSum(root.left, map);
+
+		// Replace all the nodes in the right subtree.
+		replaceWithGreaterSum(root.right, map);
+	}
+
+	public static TreeNode<Integer> convertBstToGreaterSum(TreeNode<Integer> root) {
+
+		// HashMap to store the sum of greater nodes for each node in the tree.
+		HashMap<Integer, Integer> greaterSum = new HashMap<>();
+
+		// Apply pre-order for finding greater sum for each node.
+		findGreaterSum(root, root, greaterSum);
+
+		// Now set the greater sum.
+		replaceWithGreaterSum(root, greaterSum);
+
+		return root;
+	}
+}

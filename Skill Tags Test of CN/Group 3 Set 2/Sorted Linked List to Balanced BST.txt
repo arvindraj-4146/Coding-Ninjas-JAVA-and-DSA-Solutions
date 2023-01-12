@@ -1,0 +1,54 @@
+public class Solution
+{
+	// public static TreeNode<Integer> sortedListToBST(Node<Integer> head)
+	// {
+	// 	// Write your code here.
+	// }
+
+	public static Node<Integer> findMiddleElement(Node<Integer> head)
+    {
+        // The pointer used to disconnect the left half from the mid node.
+        Node<Integer> prevPtr = null;
+
+        Node<Integer> slowPtr = head;
+        Node<Integer> fastPtr = head;
+
+        while (fastPtr != null && fastPtr.next != null)
+        {
+            prevPtr = slowPtr;
+            slowPtr = slowPtr.next;
+            fastPtr = fastPtr.next.next;
+        }
+
+        // Handling the case when 'slowPtr' was equal to head.
+        if (prevPtr != null)
+        {
+            prevPtr.next = null;
+        }
+
+        return slowPtr;
+    }
+public static TreeNode<Integer> sortedListToBST(Node<Integer> head)
+    {
+        if (head == null)
+        {
+            return null;
+        }
+
+        Node<Integer> mid = findMiddleElement(head);
+
+        TreeNode<Integer> newNode = new TreeNode<Integer>(mid.data);
+
+        // When there is only one element in the Linked List
+        if (head == mid)
+        {
+            return newNode;
+        }
+
+        // Recursively form balanced BST for left and right subtree
+        newNode.left = sortedListToBST(head);
+        newNode.right = sortedListToBST(mid.next);
+
+        return newNode;
+    }
+}

@@ -1,0 +1,53 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class Solution {
+    static int find_num_of_ways(int arr[], int N)
+    {
+        int count_even = 0, count_odd = 0;
+
+        // Finding the count of even
+        // and odd elements
+        for(int i = 0; i < N; i++)
+        {
+            if (arr[i] % 2 == 1)
+            {
+                count_odd++;
+            }
+            else
+            {
+                count_even++;
+            }
+        }
+
+        // If count_odd is odd then
+        // no. of ways is count_odd
+        if (count_odd % 2 == 1)
+        {
+            return count_odd;
+        }
+
+        // Else no. of ways is count_even
+        else
+        {
+            return count_even;
+        }
+    }
+
+    // Driver Code
+    public static void main (String[] args)
+    {
+
+        // Given array arr[]
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int arr[] = new int[n];
+        for(int i =0; i<n;i++){
+            arr[i] = scanner.nextInt();
+        }
+
+        // Function call
+        System.out.print(find_num_of_ways(arr, n));
+    }
+}

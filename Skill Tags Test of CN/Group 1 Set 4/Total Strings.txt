@@ -1,0 +1,66 @@
+/*
+	Time complexity: O👎
+	Space Complexity: O👎
+	
+	Where N is the length of strings to be found.
+*/
+
+const int MOD = 1000000007;
+
+int countStringsHelper(int memo[][2][3], int m, int freqB, int freqC)
+{
+    if (freqB > 1 || freqC > 2)
+    {
+        // Invalid string.
+        return 0;
+    }
+    
+    if (m == 0)
+    {
+        // Valid string generated.
+        return 1;
+    }
+    
+    if (freqB == 1 && freqC == 2)
+    {
+        // Only one string is possible i.e. string with all remaining characters as a.
+        return 1;
+    }
+
+    // Check if sub-problem is already solved.
+    if (memo[m][freqB][freqC] != -1)
+    {
+        // Return the stored result.
+        return memo[m][freqB][freqC];
+    }
+
+    // One by one choosing 'a', 'b' and 'c' as the next character.
+    long long counter = countStringsHelper(memo, m - 1, freqB, freqC);
+    counter = (counter + countStringsHelper(memo, m - 1, freqB + 1, freqC)) % MOD;
+    counter = (counter + countStringsHelper(memo, m - 1, freqB, freqC + 1)) % MOD;
+
+    // Store the result of the current sub-problem.
+    memo[m][freqB][freqC] = counter;
+
+    return (int)counter;
+}
+
+int countStrings(int n)
+{
+    int memo[n + 1][2][3];
+
+    for (int i = 0; i < n + 1; i++)
+    {
+        for (int j = 0; j < 2; j++)
+        {
+            for (int k = 0; k < 3; k++)
+            {
+                memo[i][j][k] = -1;
+            }
+        }
+    }
+
+    return countStringsHelper(memo, n, 0, 0);
+}
+
+///Language is C++//

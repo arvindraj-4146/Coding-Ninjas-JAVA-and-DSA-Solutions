@@ -1,0 +1,29 @@
+//Language using C++//
+
+int pairSum(int *arr, int n, int num)
+{
+    int hi=n-1,lo=0,count=0;
+    sort(arr,arr+n);
+    while(hi>lo){
+
+        if(arr[hi]+arr[lo]==num){
+
+            count++;
+            int k=lo+1;
+            while(k<hi&&arr[k]==arr[lo]){
+                k++;
+                count++;
+            }
+            hi--;
+        }
+        else if(arr[hi]+arr[lo]>num) {
+
+            hi--;
+        }
+        else
+        {
+            lo++;
+        }
+    }
+    return count;
+}

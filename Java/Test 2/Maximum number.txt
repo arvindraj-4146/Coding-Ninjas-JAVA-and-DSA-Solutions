@@ -1,0 +1,19 @@
+public class Solution {
+    
+    public static int max_number(int n){
+        
+        int a = (n - (n%10))/10;
+                
+       	int b = ((n - (n%100))/10) + (n%10);
+        
+        int c =(n-(n%1000))/10 + (n%100);
+        
+        int d = n - (n - (n%1000));
+        
+        int ans = Math.max(a,b);
+        ans = Math.max(ans,c);
+        ans = Math.max(ans,d);
+        
+        return ans;
+    }
+}

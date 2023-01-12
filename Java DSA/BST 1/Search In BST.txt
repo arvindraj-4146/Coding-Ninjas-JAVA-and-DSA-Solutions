@@ -1,0 +1,20 @@
+public class Solution {
+
+	public static boolean searchInBST(BinaryTreeNode<Integer> root, int data) {
+		if(root == null) {
+
+            return false;
+        }
+        if(root.data == data) {
+
+            return true;
+        }
+        if(data < root.data){
+
+            return searchInBST(root.left, data);    
+        }else{
+
+            return searchInBST(root.right, data);
+        }
+	}
+}

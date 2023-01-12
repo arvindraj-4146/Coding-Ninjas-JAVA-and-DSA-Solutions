@@ -1,0 +1,20 @@
+public class solution {
+
+	public static boolean isStringPalindrome(String input) {
+	    if(input.length()==0 )
+  	    return true;
+        int si=0;
+        int ei=input.length()-1;
+   	    return helper(input,si,ei);
+    }
+    private static boolean helper(String input, int si,int ei) {
+        
+        if(si==ei)
+        return true;
+        if(input.charAt(si)!=input.charAt(ei))
+        return false;
+        if(si<ei+1)
+        return helper(input,si+1 ,ei-1);
+        return true;
+    }
+}

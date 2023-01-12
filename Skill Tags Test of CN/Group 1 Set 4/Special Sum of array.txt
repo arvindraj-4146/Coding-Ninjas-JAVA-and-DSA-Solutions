@@ -1,0 +1,38 @@
+/*
+    Time Complexity: O( N ).
+    Space Complexity: O( 1 ).
+    
+    Where, N is the size of the array/list.
+*/
+
+int sum( int arr[], int n){
+
+    // Declare a variable 'sum' and initialize it with zero.
+    int sum2 = 0;
+
+    for(int i = 0; i < n; i ++){
+
+        // Add each element to the variable 'sum'.
+        sum2 += arr[i];
+
+        if( sum2 > 9 ){
+
+            /*
+                Store the sum of the digits of the variable 
+               'sum' in a new variable 'tempSum'.
+            */
+            int tempSum = 0;
+            tempSum += sum2 % 10;
+            sum2 /= 10;
+            tempSum += sum2;
+
+            // Update 'sum' as 'tempSum'. 
+            sum2 = tempSum;
+        }
+    }
+
+    return sum2;
+
+}
+
+///Language is C++//

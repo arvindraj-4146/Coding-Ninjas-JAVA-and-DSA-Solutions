@@ -1,0 +1,55 @@
+public class Solution {
+
+	public static boolean isPalindrome(LinkedListNode<Integer> head) {
+	
+        if(head == null || head.next == null)
+            return true;
+        
+        LinkedListNode<Integer> p1 = clone(head);
+        LinkedListNode<Integer> p2 = reverse(head);
+        while(p1 != null) {
+
+            if(p1.data != p2.data)
+                return false;
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+        return true;
+    }
+    
+    private static LinkedListNode<Integer> clone(LinkedListNode<Integer> head) {
+
+        LinkedListNode<Integer> cloneHead = null;
+        LinkedListNode<Integer> prev = null;
+        LinkedListNode<Integer> current = head;
+        while(current != null) {
+
+            LinkedListNode<Integer> listnode = new LinkedListNode<Integer>(current.data);
+            if(cloneHead == null) {
+
+                cloneHead = listnode;
+            }
+            if(prev != null) {
+
+                prev.next = listnode;
+            }
+            prev = listnode;
+            current = current.next;
+        }
+        return cloneHead;
+    }
+    
+    private static LinkedListNode<Integer> reverse(LinkedListNode<Integer> head) {
+
+        LinkedListNode<Integer> current = head;
+        LinkedListNode<Integer> prev = null;
+        while(current != null) {
+            
+            LinkedListNode<Integer> tmp = current.next;
+            current.next = prev;
+            prev = current;
+            current = tmp;
+        }
+        return prev;
+    }
+}

@@ -1,0 +1,44 @@
+public class Solution {
+
+	public static long maximumSumPath(int[] input1, int[] input2) {
+
+        long sum = 0;
+        int i = 0;
+        int j = 0;
+        long firstSum  = 0;
+        long secondSum  = 0;
+        
+        while(i<input1.length && j<input2.length) {
+
+            if(input1[i]<input2[j]) {
+
+                firstSum+=input1[i];
+                i++;
+            }
+            else if(input1[i]>input2[j]) {
+
+                secondSum+= input2[j];
+                j++;
+            }
+            else {
+                
+                sum += Math.max((firstSum+input1[i]), (secondSum+input2[j]));
+                firstSum= 0;
+                secondSum = 0;
+                i++;
+                j++;
+            }
+        }
+        while(i<input1.length && j>=input2.length) {
+            
+            firstSum+=input1[i];
+            i++;   
+        }
+        while(i>= input1.length && j<input2.length) {
+
+            secondSum+= input2[j];
+            j++;
+        }
+        return sum+ Math.max(firstSum, secondSum);
+	}
+}

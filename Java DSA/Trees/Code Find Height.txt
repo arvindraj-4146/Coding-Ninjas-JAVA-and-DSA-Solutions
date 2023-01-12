@@ -1,0 +1,21 @@
+import java.util.*;
+public class Solution {
+
+	public static int getHeight(TreeNode<Integer> root) {
+	
+        if(root == null) {
+
+            return 0;
+        }
+        int count = 0;
+        for(int i = 0; i < root.children.size(); i++) {
+
+            int childSize = getHeight(root.children.get(i));
+            if(childSize > count) {
+
+                count = childSize;
+            }
+        }
+        return count+1;  
+    }
+}

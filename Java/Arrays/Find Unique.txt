@@ -1,0 +1,21 @@
+public class Solution {	
+	
+	public static int findUnique(int[] arr) {
+
+        int i,j,c;
+        for(i=0;i<arr.length;i++) {
+
+            c=0;
+
+            for(j=0;j<arr.length;j++) {
+
+                if(arr[i]==arr[j])
+                    c++;
+            }
+            if(c==1) {
+                return arr[i];
+            }
+        }
+        return 0;
+	}
+}

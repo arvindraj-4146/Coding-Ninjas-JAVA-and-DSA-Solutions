@@ -1,0 +1,37 @@
+import java.util.Scanner;
+import java.io.*;
+import java.lang.*;
+
+public class Solution {
+
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = n;
+        int o = n;
+        for(int i=1;i<=n;i++){
+            
+            int j;
+            for(j=1;j<=m;j++){
+
+                System.out.print(j);
+            }
+            m--;
+            if(i>1){
+
+                for(int p=1;p<=2*i-2;p++){
+
+                    System.out.print("*");
+                }
+            }
+            for(int k=o;k>=1;k--){
+                
+                System.out.print(k);
+            }
+            o--;
+    
+        	System.out.println();
+    	} 
+    }
+}

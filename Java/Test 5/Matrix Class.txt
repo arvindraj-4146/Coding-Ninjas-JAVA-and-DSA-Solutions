@@ -1,0 +1,86 @@
+public class mat{
+
+    int [][] matrix;
+    mat(int [][] mat) {
+
+        matrix=mat;
+    }
+    public static mat add(mat a,mat b) {
+
+        int r1=a.matrix.length;
+        int c1=a.matrix[0].length;
+        for(int i=0;i<r1;i++) {
+
+            for(int j=0;j<c1;j++)
+            a.matrix[i][j]+=b.matrix[i][j];
+        }
+        return a;
+    }
+    public static mat multiply(mat a,mat b) {
+
+        int r =a.matrix.length;
+        int c=a.matrix[0].length;
+        int ce=b.matrix[0].length;
+        int arr[][]=new int[r][ce];
+        mat n = new mat(arr);
+        int i,j,k;
+        for(i=0;i<r;i++) {
+
+            for(j=0;j<ce;j++) {
+
+                n.matrix[i][j]=0;
+                for(k=0;k<c;k++){
+
+                    n.matrix[i][j]+=a.matrix[i][k]*b.matrix[k][j];  
+                }
+            }
+        }
+        return n;
+    }
+    public static mat transpose(mat m) {
+
+        int r =m.matrix.length;
+        int c=m.matrix[0].length;
+        int arr[][]=new int[c][r];
+        mat n = new mat(arr);
+        for(int i=0;i<r;i++) {
+
+            for(int j=0;j<c;j++)
+            n.matrix[i][j]=m.matrix[j][i];
+        }
+        return n;
+    }
+    public static mat rotate(mat m) {
+
+        int row=m.matrix.length;
+        int column=m.matrix[0].length;
+
+        for (int x = 0; x < row / 2; x++) { 
+
+            for (int y = x; y < column-x-1; y++) { 
+
+                int temp = m.matrix[x][y]; 
+
+                m.matrix[x][y] = m.matrix[y][row-1-x]; 
+
+                m.matrix[y][row-1-x] = m.matrix[row-1-x][column-1-y]; 
+
+                m.matrix[row-1-x][row-1-y] = m.matrix[row-1-y][x]; 
+
+                m.matrix[row-1-y][x] = temp; 
+            } 
+        } 
+        return m;
+    }
+    public  void print() {
+
+        for(int i=0;i<matrix.length;i++) {
+            
+            for(int j=0;j<matrix[0].length;j++) {
+
+                System.out.print(matrix[i][j]+" ");
+            }
+            System.out.println();
+        }
+    }
+}
